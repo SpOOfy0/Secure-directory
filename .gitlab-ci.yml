@@ -1,13 +1,18 @@
 image: docker:20.10.16
 
 services:
-  - docker:dind
+  - name: docker:dind
+    command: ["--tls=false"]
+    privileged: true  # Ajoute cette ligne !
+
 
 variables:
+  DOCKER_TLS_CERTDIR: ""  # Désactive le TLS qui bloque Docker-in-Docker
   DOCKER_HOST: tcp://docker:2375/
   CI_REGISTRY: "wvm-srv7.luminy.univ-amu.fr:5050"
   BACKEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_backend"
   FRONTEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_frontend"
+
 
 stages:
   - test
@@ -28,10 +33,11 @@ before_script:
 
 # Étape 1: Test Backend
 test-backend:
-  image: maven:3.8.8-eclipse-temurin-17
+  image: docker:latest
   stage: test
   script:
-    - echo "Exécution des tests backend..."
+    - apk add --no-cache maven openjdk17  # Installe Maven et Java
+    - echo "🔍 Exécution des tests backend..."
     - cd backend
     - mvn test
   only:
@@ -39,9 +45,10 @@ test-backend:
 
 # Étape 2: Build Backend
 build-backend:
-  image: maven:3.8.8-eclipse-temurin-17
+  image: docker:latest
   stage: build
   script:
+    - apk add --no-cache maven openjdk17  # Installe Maven et Java
     - echo "Compilation du backend..."
     - cd backend
     - mvn clean package -DskipTests
@@ -93,6 +100,7 @@ docker-push-frontend:
 deploy:
   stage: deploy
   script:
+    - apk add --no-cache maven openjdk17  # Installe Maven et Java
     - echo "Déploiement en cours sur la VM..."
     - ssh projet@139.124.86.159 "mkdir -p ~/secure_directory"
     - scp backend/target/*.jar projet@139.124.86.159:~/secure_directory/backend.jar
