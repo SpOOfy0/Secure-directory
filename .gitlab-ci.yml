@@ -25,9 +25,10 @@ before_script:
   - ssh-add ~/.ssh/id_ed25519
   - ssh-keyscan 139.124.86.159 >> ~/.ssh/known_hosts
 
+
 # Étape 1: Test Backend
 test-backend:
-  image: maven:3.8.6-jdk-17  # Changement ici
+  image: maven:3.8.6-openjdk-11
   stage: test
   script:
     - echo "Exécution des tests backend..."
@@ -38,7 +39,7 @@ test-backend:
 
 # Étape 2: Build Backend
 build-backend:
-  image: maven:3.8.6-jdk-17  # Changement ici
+  image: maven:3.8.6-openjdk-11
   stage: build
   script:
     - echo "Compilation du backend..."
