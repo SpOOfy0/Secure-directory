@@ -28,7 +28,7 @@ before_script:
 
 # Étape 1: Test Backend
 test-backend:
-  image: maven:3.8.6-openjdk-17
+  image: maven:3.8.8-eclipse-temurin-17
   stage: test
   script:
     - echo "Exécution des tests backend..."
@@ -39,7 +39,7 @@ test-backend:
 
 # Étape 2: Build Backend
 build-backend:
-  image: maven:3.8.6-openjdk-17
+  image: maven:3.8.8-eclipse-temurin-17
   stage: build
   script:
     - echo "Compilation du backend..."
