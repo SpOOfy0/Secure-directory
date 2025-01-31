@@ -10,7 +10,7 @@ variables:
   FRONTEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_frontend"
 
 stages:
-  # - test
+  - test
   - build
   - push
   - deploy
@@ -27,15 +27,15 @@ before_script:
 
 
 # Étape 1: Test Backend
-# test-backend:
-#   image: maven:3.8.6-openjdk-17
-#   stage: test
-#   script:
-#     - echo "Exécution des tests backend..."
-#     - cd backend
-#     - mvn test
-#   only:
-#     - main  # Change 'main' selon votre branche principale
+test-backend:
+  image: maven:3.8.6-openjdk-17
+  stage: test
+  script:
+    - echo "Exécution des tests backend..."
+    - cd backend
+    - mvn test
+  only:
+    - main  # Change 'main' selon votre branche principale
 
 # Étape 2: Build Backend
 build-backend:
