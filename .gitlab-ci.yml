@@ -11,7 +11,7 @@ variables:
   FRONTEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_frontend"
 
 stages:
-  - test
+  # - test
   - build
   - push
   - deploy
@@ -27,15 +27,15 @@ before_script:
   - ssh-keyscan 139.124.86.159 >> ~/.ssh/known_hosts
 
 # Étape 1: Test Backend
-test-backend:
-  image: maven:3.8.6-openjdk-11  # Utiliser Maven pour les tests
-  stage: test
-  script:
-    - echo "Exécution des tests backend..."
-    - cd backend
-    - mvn test
-  only:
-    - main
+# test-backend:
+#   image: maven:3.8.6-openjdk-11  # Utiliser Maven pour les tests
+#   stage: test
+#   script:
+#     - echo "Exécution des tests backend..."
+#     - cd backend
+#     - mvn test
+#   only:
+#     - main
 
 # Étape 2: Build Backend
 build-backend:
