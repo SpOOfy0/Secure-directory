@@ -1,10 +1,11 @@
-image: docker:20.10.16
+image: docker:20.10.16  # Utiliser une image avec Docker installé
 
 services:
-  - docker:dind
+  - docker:20.10.16-dind  # Utiliser docker-in-docker
 
 variables:
   DOCKER_HOST: tcp://docker:2375/
+  DOCKER_TLS_CERTDIR: ""  # Désactiver TLS pour simplifier
   CI_REGISTRY: "wvm-srv7.luminy.univ-amu.fr:5050"
   BACKEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_backend"
   FRONTEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_frontend"
@@ -25,21 +26,20 @@ before_script:
   - ssh-add ~/.ssh/id_ed25519
   - ssh-keyscan 139.124.86.159 >> ~/.ssh/known_hosts
 
-
 # Étape 1: Test Backend
 test-backend:
-  image: maven:3.8.6-openjdk-11
+  image: maven:3.8.6-openjdk-11  # Utiliser Maven pour les tests
   stage: test
   script:
     - echo "Exécution des tests backend..."
     - cd backend
     - mvn test
   only:
-    - main  # Change 'main' selon votre branche principale
+    - main
 
 # Étape 2: Build Backend
 build-backend:
-  image: maven:3.8.6-openjdk-11
+  image: maven:3.8.6-openjdk-11  # Utiliser Maven pour la compilation
   stage: build
   script:
     - echo "Compilation du backend..."
@@ -53,6 +53,7 @@ build-backend:
 
 # Étape 3: Build Docker Image Backend
 docker-build-backend:
+  image: docker:20.10.16  # Utiliser Docker pour construire l'image
   stage: build
   script:
     - echo "Construction de l'image Docker backend..."
@@ -63,15 +64,17 @@ docker-build-backend:
 
 # Étape 4: Push Docker Image Backend
 docker-push-backend:
+  image: docker:20.10.16  # Utiliser Docker pour pousser l'image
   stage: push
   script:
-    - echo " Pushing de l'image Docker backend..."
+    - echo "Pushing de l'image Docker backend..."
     - docker push $BACKEND_IMAGE
   only:
     - main
 
 # Étape 5: Build Docker Image Frontend
 docker-build-frontend:
+  image: docker:20.10.16  # Utiliser Docker pour construire l'image
   stage: build
   script:
     - echo "Construction de l'image Docker frontend..."
@@ -82,6 +85,7 @@ docker-build-frontend:
 
 # Étape 6: Push Docker Image Frontend
 docker-push-frontend:
+  image: docker:20.10.16  # Utiliser Docker pour pousser l'image
   stage: push
   script:
     - echo "Pushing de l'image Docker frontend..."
