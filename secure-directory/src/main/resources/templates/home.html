@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil</title>
+    <!-- CSS pour la barre de navigation -->
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="home.css"> <!-- Styles spécifiques à cette page -->
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="/profil" class="profile-link">Profil</a>
+        <a href="/logout" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="home-container">
+        <h1>Bienvenue sur votre espace</h1>
+        <p>Vous êtes connecté en tant que : <strong th:text="${role}"></strong></p>
+
+        <!-- Lien conditionnel pour la liste des utilisateurs -->
+        <div class="user-links">
+            <a th:if="${isAdmin}" href="/admin/utilisateurs" class="admin-link">Gérer les utilisateurs (ADMIN)</a>
+            <a th:if="${isUser}" href="/user/utilisateurs" class="user-link">Voir les utilisateurs (USER)</a>
+        </div>
+    </div>
+</body>
+</html>

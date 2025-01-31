@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des utilisateurs</title>
+    <link rel="stylesheet" href="../navbar.css"> <!-- CSS pour la barre de navigation -->
+    <link rel="stylesheet" href="../utilisateurs.css"> <!-- CSS spécifique pour la liste des utilisateurs -->
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="/home" class="home-link">Accueil</a>
+        <a href="/profil" class="profile-link">Profil</a>
+        <a href="/logout" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Liste des utilisateurs</h1>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="utilisateur : ${utilisateurs}">
+                    <td th:text="${utilisateur.id}"></td>
+                    <td th:text="${utilisateur.nom}"></td>
+                    <td th:text="${utilisateur.prenom}"></td>
+                    <td th:text="${utilisateur.email}"></td>
+                    <td>
+                        <span th:each="role : ${utilisateur.roles}" th:text="${role.nom}"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

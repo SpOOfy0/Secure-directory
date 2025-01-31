@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil</title>
+    <link rel="stylesheet" href="../navbar.css"> <!-- Styles pour la navbar -->
+    <link rel="stylesheet" href="../profil.css"> <!-- Styles spécifiques pour la page du profil -->
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="/home" class="home-link">Accueil</a>
+        <a href="/logout" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Mon Profil</h1>
+        <div class="profile-info">
+            <p><strong>Email :</strong> <span th:text="${utilisateur.email}"></span></p>
+            <p><strong>Nom :</strong> <span th:text="${utilisateur.nom}"></span></p>
+            <p><strong>Prénom :</strong> <span th:text="${utilisateur.prenom}"></span></p>
+        </div>
+
+        <!-- Formulaire de mise à jour du profil -->
+        <form action="/profil/miseAJour" method="post" class="update-form">
+            <h2>Mettre à jour le profil</h2>
+            <input type="hidden" name="id" th:value="${utilisateur.id}">
+
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" th:value="${utilisateur.nom}">
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" th:value="${utilisateur.prenom}">
+            </div>
+
+            <div class="form-group">
+                <label for="nouveauMotDePasse">Nouveau mot de passe :</label>
+                <input type="password" id="nouveauMotDePasse" name="nouveauMotDePasse" placeholder="Laisser vide pour ne pas changer">
+            </div>
+
+            <button type="submit" class="btn-update">Mettre à jour</button>
+        </form>
+
+        <!-- Formulaire pour clôturer le compte -->
+        <form action="/profil/cloturer" method="post" class="close-account-form">
+            <h2>Clôturer mon compte</h2>
+            <button type="submit" class="btn-close">Clôturer le compte</button>
+        </form>
+    </div>
+</body>
+</html>

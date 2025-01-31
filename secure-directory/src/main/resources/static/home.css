@@ -1,0 +1,88 @@
+/* Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Conteneur principal */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+/* En-tête */
+.home-header h1 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.home-header p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Liens conditionnels */
+.user-links,
+.profile-links {
+    margin: 15px 0;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.admin-link {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.admin-link:hover {
+    background-color: #0056b3;
+}
+
+.user-link {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.user-link:hover {
+    background-color: #117a8b;
+}
+
+.profile-link {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.profile-link:hover {
+    background-color: #218838;
+}
+
+.logout-link {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.logout-link:hover {
+    background-color: #c82333;
+}

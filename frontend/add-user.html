@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un utilisateur</title>
+    <link rel="stylesheet" href="navbar.css"> <!-- Barre de navigation -->
+    <link rel="stylesheet" href="css/admin-add.css"> <!-- Styles spécifiques pour cette page -->
+</head>
+<body data-requires-auth="true">
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="profil.html" class="profile-link">Profil</a>
+        <a href="#" id="logoutButton" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Ajouter un nouvel utilisateur</h1>
+        <!-- Zone pour afficher les messages de succès ou d'erreur -->
+        <div id="message" class="message"></div>
+        <form id="addUserForm" class="add-user-form">
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" placeholder="Ex : utilisateur@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="motDePasse">Mot de passe :</label>
+                <input type="password" id="motDePasse" name="motDePasse" placeholder="Mot de passe" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" placeholder="Nom" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="role">Rôle :</label>
+                <select name="role" id="role">
+                    <option value="USER">Utilisateur</option>
+                    <option value="ADMIN">Administrateur</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Ajouter l'utilisateur</button>
+                <a href="admin-user.html" class="btn-back">Retour</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Ajout des scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/add-user.js"></script>
+</body>
+</html>

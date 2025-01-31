@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un utilisateur</title>
+    <link rel="stylesheet" href="../navbar.css"> <!-- Barre de navigation -->
+    <link rel="stylesheet" href="../admin-edit-user.css"> <!-- Styles spécifiques à cette page -->
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="/profil" class="profile-link">Profil</a>
+        <a href="/logout" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Modifier un utilisateur</h1>
+        <form action="/admin/utilisateur/modifier" method="post" class="edit-user-form">
+            <!-- Champ caché pour l'ID de l'utilisateur -->
+            <input type="hidden" name="id" th:value="${utilisateur.id}">
+            
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" th:value="${utilisateur.email}" placeholder="Nouvel email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" th:value="${utilisateur.nom}" placeholder="Nouveau nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" th:value="${utilisateur.prenom}" placeholder="Nouveau prénom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="motDePasse">Mot de passe :</label>
+                <input type="password" id="motDePasse" name="motDePasse" placeholder="Nouveau mot de passe">
+            </div>
+
+            <div class="form-group">
+                <label for="role">Rôle :</label>
+                <select name="role" id="role">
+                    <option value="USER" th:selected="${#lists.contains(utilisateur.roles, 'USER')}">Utilisateur</option>
+                    <option value="ADMIN" th:selected="${#lists.contains(utilisateur.roles, 'ADMIN')}">Administrateur</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Modifier</button>
+                <a href="/admin/utilisateurs" class="btn-back">Retour</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

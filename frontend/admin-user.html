@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des utilisateurs</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/admin-list.css">
+</head>
+<body data-requires-auth="true">
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="profil.html" class="profile-link">Profil</a>
+        <span id="userRole">Chargement...</span> <!-- ✅ Affichage du rôle -->
+        <a href="#" id="logoutButton" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Liste des utilisateurs</h1>
+
+        <!-- Lien pour ajouter un utilisateur -->
+        <div class="actions">
+            <a href="add-user.html" class="add-user-btn">Ajouter un utilisateur</a>
+        </div>
+
+        <!-- Tableau des utilisateurs -->
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- Les utilisateurs seront injectés ici par JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin-user.js"></script>
+</body>
+</html>

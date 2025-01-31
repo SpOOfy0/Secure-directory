@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil</title>
+    <link rel="stylesheet" href="../navbar.css"> <!-- Styles pour la navbar -->
+    <link rel="stylesheet" href="css/profil.css"> <!-- Styles spécifiques pour la page du profil -->
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="/home" class="home-link">Accueil</a>
+        <button id="logoutButton" class="logout-link">Déconnexion</button>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Mon Profil</h1>
+        <div class="profile-info">
+            <p><strong>Email :</strong> <span id="userEmail"></span></p>
+            <p><strong>Nom :</strong> <span id="userNom"></span></p>
+            <p><strong>Prénom :</strong> <span id="userPrenom"></span></p>
+        </div>
+
+        <!-- Formulaire de mise à jour du profil -->
+        <form id="updateProfileForm" class="update-form">
+            <h2>Mettre à jour le profil</h2>
+            <input type="hidden" id="userId">
+
+            <div class="form-group">
+                <label for="newNom">Nom :</label>
+                <input type="text" id="newNom" name="nom">
+            </div>
+
+            <div class="form-group">
+                <label for="newPrenom">Prénom :</label>
+                <input type="text" id="newPrenom" name="prenom">
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">Nouveau mot de passe :</label>
+                <input type="password" id="newPassword" name="nouveauMotDePasse" placeholder="Laisser vide pour ne pas changer">
+            </div>
+
+            <button type="submit" class="btn-update">Mettre à jour</button>
+        </form>
+
+        <!-- Formulaire pour clôturer le compte -->
+        <form id="closeAccountForm" class="close-account-form">
+            <h2>Clôturer mon compte</h2>
+            <button type="submit" class="btn-close">Clôturer le compte</button>
+        </form>
+    </div>
+
+    <script src="js/profil.js"></script> <!-- Inclusion du fichier JS -->
+</body>
+</html>

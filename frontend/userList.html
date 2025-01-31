@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des utilisateurs</title>
+
+    <!-- ✅ Vérifie le bon chargement des fichiers CSS -->
+    <link rel="stylesheet" href="css/navbar.css"> <!-- ✅ Ajout du chemin correct -->
+    <link rel="stylesheet" href="css/userList.css"> <!-- ✅ Assurez-vous que ce fichier existe -->
+
+</head>
+<body data-requires-auth="true">
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="home.html" class="home-link">Accueil</a>
+        <a href="profil.html" class="profile-link">Profil</a>
+        <button id="logoutButton" class="logout-link">Déconnexion</button>
+    </div>
+
+    <!-- ✅ Affichage des informations de l'utilisateur connecté -->
+    <div class="user-info">
+        <p><strong>Rôle :</strong> <span id="role">Chargement...</span></p>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Liste des utilisateurs</h1>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- Les utilisateurs seront injectés ici via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ✅ Vérifie que les fichiers JS sont bien chargés -->
+    <script src="js/auth.js"></script>
+    <script src="js/userList.js"></script>
+
+</body>
+</html>

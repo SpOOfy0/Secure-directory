@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un utilisateur</title>
+    <link rel="stylesheet" href="navbar.css"> <!-- Barre de navigation -->
+    <link rel="stylesheet" href="css/admin-edit-user.css"> <!-- Styles spécifiques à cette page -->
+</head>
+<body data-requires-auth="true">
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="profil.html" class="profile-link">Profil</a>
+        <a href="#" id="logoutButton" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Modifier un utilisateur</h1>
+        <!-- Zone pour afficher les messages -->
+        <div id="message" class="message"></div>
+        <form id="editUserForm" class="edit-user-form">
+            <!-- Champ caché pour l'ID de l'utilisateur -->
+            <input type="hidden" id="userId">
+
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" placeholder="Nouvel email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" placeholder="Nouveau nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Nouveau prénom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="motDePasse">Mot de passe :</label>
+                <input type="password" id="motDePasse" name="motDePasse" placeholder="Nouveau mot de passe">
+            </div>
+
+            <div class="form-group">
+                <label for="role">Rôle :</label>
+                <select name="role" id="role">
+                    <option value="USER">Utilisateur</option>
+                    <option value="ADMIN">Administrateur</option>
+                </select>
+            </div>
+            
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Modifier</button>
+                <a href="admin-user.html" class="btn-back">Retour</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/edit-user.js"></script>
+</body>
+</html>

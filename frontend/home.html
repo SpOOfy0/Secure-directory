@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil</title>
+    <!-- CSS pour la barre de navigation -->
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/home.css"> <!-- Styles spécifiques à cette page -->
+</head>
+<body data-requires-auth="true"> <!-- Vérifie si l'utilisateur est authentifié -->
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="profil.html" class="profile-link">Profil</a>
+        <a href="#" id="logoutButton" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="home-container">
+        <h1>Bienvenue sur votre espace</h1>
+        <p>Vous êtes connecté en tant que : <strong id="role"></strong></p>
+
+        <!-- Lien conditionnel pour la liste des utilisateurs -->
+        <!-- Lien conditionnel pour la liste des utilisateurs -->
+            <div class="user-links">
+                <a id="adminLink" href="admin-user.html" class="admin-link" style="display: none;">Gérer les utilisateurs (ADMIN)</a>
+                <a id="userLink" href="userList.html" class="user-link" style="display: none;">Voir les utilisateurs (USER)</a>
+            </div>
+
+    </div>
+
+    <!-- Script JS -->
+    <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des utilisateurs</title>
+    <link rel="stylesheet" href="../navbar.css">
+    <link rel="stylesheet" href="../admin-list.css"> 
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="/profil" class="profile-link">Profil</a>
+        <a href="/logout" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Liste des utilisateurs</h1>
+
+        <!-- Lien pour ajouter un utilisateur -->
+        <div class="actions">
+            <a href="/admin/utilisateur/ajouter" class="add-user-btn">Ajouter un utilisateur</a>
+        </div>
+
+        <!-- Tableau des utilisateurs -->
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="utilisateur : ${utilisateurs}">
+                    <td th:text="${utilisateur.id}"></td>
+                    <td th:text="${utilisateur.nom}"></td>
+                    <td th:text="${utilisateur.email}"></td>
+                    <td>
+                        <th:block th:if="${not #lists.isEmpty(utilisateur.roles)}">
+                            <span th:text="${utilisateur.roles[0].nom}"></span>
+                        </th:block>
+                        <th:block th:if="${#lists.isEmpty(utilisateur.roles)}">
+                            <span>Aucun rôle assigné</span>
+                        </th:block>
+                    </td>
+                    <td class="actions">
+                        <form action="/admin/utilisateur/supprimer" method="post" class="action-form">
+                            <input type="hidden" name="id" th:value="${utilisateur.id}">
+                            <button type="submit" class="btn-delete">Supprimer</button>
+                        </form>
+                        <form action="/admin/utilisateur/modifier" method="get" class="action-form">
+                            <input type="hidden" name="id" th:value="${utilisateur.id}">
+                            <button type="submit" class="btn-edit">Modifier</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un utilisateur</title>
+    <link rel="stylesheet" href="../navbar.css"> <!-- Barre de navigation -->
+    <link rel="stylesheet" href="../admin-add.css"> <!-- Styles spécifiques pour cette page -->
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="/profil" class="profile-link">Profil</a>
+        <a href="/logout" class="logout-link">Déconnexion</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Ajouter un nouvel utilisateur</h1>
+        <form action="/admin/utilisateur/ajouter" method="post" class="add-user-form">
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" placeholder="Ex : utilisateur@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="motDePasse">Mot de passe :</label>
+                <input type="password" id="motDePasse" name="motDePasse" placeholder="Mot de passe" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" placeholder="Nom" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="role">Rôle :</label>
+                <select name="role" id="role">
+                    <option value="USER">Utilisateur</option>
+                    <option value="ADMIN">Administrateur</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Ajouter l'utilisateur</button>
+                <a href="/admin/utilisateurs" class="btn-back">Retour</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
