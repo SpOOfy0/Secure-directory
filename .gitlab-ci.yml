@@ -2,17 +2,17 @@ image: docker:20.10.16
 
 services:
   - name: docker:dind
-    entrypoint: [""]
     command: ["--tls=false"]
-    privileged: true  # Permettre Docker-in-Docker
+    privileged: true  # Ajoute cette ligne !
+
 
 variables:
-  DOCKER_TLS_CERTDIR: ""  # Désactiver le TLS qui bloque Docker-in-Docker
-  DOCKER_DRIVER: overlay2  # Éviter les conflits avec le stockage
+  DOCKER_TLS_CERTDIR: ""  # Désactive le TLS qui bloque Docker-in-Docker
   DOCKER_HOST: tcp://docker:2375/
   CI_REGISTRY: "wvm-srv7.luminy.univ-amu.fr:5050"
   BACKEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_backend"
   FRONTEND_IMAGE: "$CI_REGISTRY/spoofy/secure_directory_frontend"
+
 
 stages:
   - test
@@ -21,9 +21,7 @@ stages:
   - deploy
 
 before_script:
-  - echo "🚀 Vérification de Docker..."
-  - docker version
-  - echo "🚀 Connexion à la registry GitLab..."
+  - echo "Connexion à la registry GitLab..."
   - docker login $CI_REGISTRY -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
   - mkdir -p ~/.ssh
   - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
@@ -32,23 +30,26 @@ before_script:
   - ssh-add ~/.ssh/id_ed25519
   - ssh-keyscan 139.124.86.159 >> ~/.ssh/known_hosts
 
-# 📌 Étape 1: Test Backend
+
+# Étape 1: Test Backend
 test-backend:
-  image: maven:3.8.8-eclipse-temurin-17
+  image: docker:latest
   stage: test
   script:
+    - apk add --no-cache maven openjdk17  # Installe Maven et Java
     - echo "🔍 Exécution des tests backend..."
     - cd backend
     - mvn test
   only:
-    - main  # Change 'main' selon ta branche principale
+    - main  # Change 'main' selon votre branche principale
 
-# 📌 Étape 2: Build Backend
+# Étape 2: Build Backend
 build-backend:
-  image: maven:3.8.8-eclipse-temurin-17
+  image: docker:latest
   stage: build
   script:
-    - echo "🛠️ Compilation du backend..."
+    - apk add --no-cache maven openjdk17  # Installe Maven et Java
+    - echo "Compilation du backend..."
     - cd backend
     - mvn clean package -DskipTests
   artifacts:
@@ -57,49 +58,50 @@ build-backend:
   only:
     - main
 
-# 📌 Étape 3: Build Docker Image Backend
+# Étape 3: Build Docker Image Backend
 docker-build-backend:
   stage: build
   script:
-    - echo "📦 Construction de l'image Docker backend..."
+    - echo "Construction de l'image Docker backend..."
     - cd backend
     - docker build -t $BACKEND_IMAGE .
   only:
     - main
 
-# 📌 Étape 4: Push Docker Image Backend
+# Étape 4: Push Docker Image Backend
 docker-push-backend:
   stage: push
   script:
-    - echo "📤 Pushing de l'image Docker backend..."
+    - echo " Pushing de l'image Docker backend..."
     - docker push $BACKEND_IMAGE
   only:
     - main
 
-# 📌 Étape 5: Build Docker Image Frontend
+# Étape 5: Build Docker Image Frontend
 docker-build-frontend:
   stage: build
   script:
-    - echo "📦 Construction de l'image Docker frontend..."
+    - echo "Construction de l'image Docker frontend..."
     - cd frontend
     - docker build -t $FRONTEND_IMAGE .
   only:
     - main
 
-# 📌 Étape 6: Push Docker Image Frontend
+# Étape 6: Push Docker Image Frontend
 docker-push-frontend:
   stage: push
   script:
-    - echo "📤 Pushing de l'image Docker frontend..."
+    - echo "Pushing de l'image Docker frontend..."
     - docker push $FRONTEND_IMAGE
   only:
     - main
 
-# 📌 Étape 7: Déploiement sur la VM
+# Étape 7: Déploiement sur la VM
 deploy:
   stage: deploy
   script:
-    - echo "🚀 Déploiement en cours sur la VM..."
+    - apk add --no-cache maven openjdk17  # Installe Maven et Java
+    - echo "Déploiement en cours sur la VM..."
     - ssh projet@139.124.86.159 "mkdir -p ~/secure_directory"
     - scp backend/target/*.jar projet@139.124.86.159:~/secure_directory/backend.jar
     - scp -r frontend/dist/* projet@139.124.86.159:~/secure_directory/frontend
